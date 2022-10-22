@@ -7,177 +7,111 @@ Data Science tutorial project by the Hadavand's Minions group to tackle the Kagg
 The project was setup using `cookiecutter` as described in the
 [project setup](./docs/projectSetup.md).
 
-## Prerequisites
+## Tools used in this project
 
-- [Anaconda](https://www.anaconda.com/download/) >=5.x
+* [Poetry](https://towardsdatascience.com/how-to-effortlessly-publish-your-python-package-to-pypi-using-poetry-44b305362f9f): Dependency management - [article](https://towardsdatascience.com/how-to-effortlessly-publish-your-python-package-to-pypi-using-poetry-44b305362f9f)
+* [hydra](https://hydra.cc/): Manage configuration files - [article](https://towardsdatascience.com/introduction-to-hydra-cc-a-powerful-framework-to-configure-your-data-science-projects-ed65713a53c6)
+* [pre-commit plugins](https://pre-commit.com/): Automate code reviewing formatting  - [article](https://towardsdatascience.com/4-pre-commit-plugins-to-automate-code-reviewing-and-formatting-in-python-c80c6d2e9f5?sk=2388804fb174d667ee5b680be22b8b1f)
+* [DVC](https://dvc.org/): Data version control - [article](https://towardsdatascience.com/introduction-to-dvc-data-version-control-tool-for-machine-learning-projects-7cb49c229fe0)
+* [pdoc](https://github.com/pdoc3/pdoc): Automatically create an API documentation for your project
 
-## API credentials
-
-To use the Kaggle API, sign up for a Kaggle account at <https://www.kaggle.com>. Then go to the 'Account' tab of your user profile (`https://www.kaggle.com/<username>/account`) and select 'Create API Token'. This will trigger the download of `kaggle.json`, a file containing your API credentials. Place this file in the location `~/.kaggle/kaggle.json` (on Windows in the location `C:\Users\<Windows-username>\.kaggle\kaggle.json`).
-
-For your security, ensure that other users of your computer do not have read access to your credentials. On Unix-based systems you can do this with the following command:
-
-```bash
-chmod 600 ~/.kaggle/kaggle.json
-```
-
-## Installation guide
-
-### Set up conda environment
-
-Using conda:
+## Project structure
 
 ```bash
-conda env create -f environment.yml
-activate rsna_cervical_spine
+.
+├── config                      
+│   ├── main.yaml                   # Main configuration file
+│   ├── model                       # Configurations for training model
+│   │   ├── model1.yaml             # First variation of parameters to train model
+│   │   └── model2.yaml             # Second variation of parameters to train model
+│   └── process                     # Configurations for processing data
+│       ├── process1.yaml           # First variation of parameters to process data
+│       └── process2.yaml           # Second variation of parameters to process data
+├── data            
+│   ├── final                       # data after training the model
+│   ├── processed                   # data after processing
+│   ├── raw                         # raw data
+│   └── raw.dvc                     # DVC file of data/raw
+├── docs                            # documentation for your project
+├── dvc.yaml                        # DVC pipeline
+├── .flake8                         # configuration for flake8 - a Python formatter tool
+├── .gitignore                      # ignore files that cannot commit to Git
+├── Makefile                        # store useful commands to set up the environment
+├── models                          # store models
+├── notebooks                       # store notebooks
+├── .pre-commit-config.yaml         # configurations for pre-commit
+├── pyproject.toml                  # dependencies for poetry
+├── README.md                       # describe your project
+├── src                             # store source code
+│   ├── __init__.py                 # make src a Python module 
+│   ├── process.py                  # process data before training model
+│   └── train_model.py              # train model
+└── tests                           # store tests
+    ├── __init__.py                 # make tests a Python module 
+    ├── test_process.py             # test functions for process.py
+    └── test_train_model.py         # test functions for train_model.py
 ```
 
-The packages necessary to run the project are now installed inside the conda environment.
+## Set up the environment
 
-**Note: The following sections assume you are located in your conda environment.**
+1. Install [Poetry](https://python-poetry.org/docs/#installation)
+2. Set up the environment:
 
-### Set up project's module
+    ```bash
+    make activate
+    make setup
+    ```
 
-To move beyond notebook prototyping, all reusable code should go into the `src/` folder package. To use that package inside your project, install the project's module in editable mode, so you can edit files in the `src/` folder and use the modules inside your notebooks :
+## Install new packages
+
+To install new PyPI packages, run:
 
 ```bash
-pip install --editable .
+poetry add <package-name>
 ```
 
-To use the module inside your notebooks, add `%autoreload` at the top of your notebook :
+## Run the entire pipeline
+
+To run the entire pipeline, type:
 
 ```bash
-%load_ext autoreload
-%autoreload 2
+dvc repo
 ```
 
-Example of module usage :
+## Version your data
 
-```py
-from src.data.make_dataset import generate
-generate(10)
-```
+Read [this article](https://towardsdatascience.com/introduction-to-dvc-data-version-control-tool-for-machine-learning-projects-7cb49c229fe0) on how to use DVC to version your data.
 
-## Set up Git diff for notebooks and lab
-
-We use [nbdime](https://nbdime.readthedocs.io/en/stable/index.html) for diffing and merging Jupyter notebooks.
-
-To configure it to this git project :
+Basically, you start with setting up a remote storage. The remote storage is where your data is stored. You can store your data on DagsHub, Google Drive, Amazon S3, Azure Blob Storage, Google Cloud Storage, Aliyun OSS, SSH, HDFS, and HTTP.
 
 ```bash
-nbdime config-git --enable
+dvc remote add -d remote <REMOTE-URL>
 ```
 
-To enable notebook extension :
+Commit the config file:
 
 ```bash
-nbdime extensions --enable --sys-prefix
+git commit .dvc/config -m "Configure remote storage"
 ```
 
-Or, if you prefer full control, you can run the individual steps:
+Push the data to remote storage:
 
 ```bash
-jupyter serverextension enable --py nbdime --sys-prefix
-
-jupyter nbextension install --py nbdime --sys-prefix
-jupyter nbextension enable --py nbdime --sys-prefix
-
-jupyter labextension install nbdime-jupyterlab
+dvc push 
 ```
 
-You may need to rebuild the extension : `jupyter lab build`
-
-## Set up Plotly for Jupyterlab
-
-Plotly works in notebook but further steps are needed for it to work in Jupyterlab :
-
-- @jupyter-widgets/jupyterlab-manager # Jupyter widgets support
-- plotlywidget  # FigureWidget support
-- @jupyterlab/plotly-extension  # offline iplot support
-
-There are conflict versions between those extensions so check the [latest Plotly README](https://github.com/plotly/plotly.py#installation-of-plotlypy-version-3) to ensure you fetch the correct ones.
+Add and push all changes to Git:
 
 ```bash
-jupyter labextension install @jupyter-widgets/jupyterlab-manager@0.36 --no-build
-jupyter labextension install plotlywidget@0.2.1  --no-build
-jupyter labextension install @jupyterlab/plotly-extension@0.16  --no-build
-jupyter lab build
+git add .
+git commit -m 'commit-message'
+git push origin <branch>
 ```
 
-## Invoke command
+## Auto-generate API documentation
 
-We use [Invoke](http://www.pyinvoke.org/) to manage an
-unique entry point into all of the project tasks.
-
-List of all tasks for project :
+To auto-generate API document for your project, run:
 
 ```bash
-$ invoke -l
-
-Available tasks:
-
-  lab     Launch Jupyter lab
+make docs
 ```
-
-Help on a particular task :
-
-```bash
-$ invoke --help lab
-Usage: inv[oke] [--core-opts] notebook [--options] [other tasks here ...]
-
-Docstring:
-  Launch Jupyter lab
-
-Options:
-  -i STRING, --ip=STRING   IP to listen on, defaults to *
-  -p, --port               Port to listen on, defaults to 8888
-```
-
-You will find the definition of each task inside the `tasks.py` file, so you can add your own.
-
-_PS : we don't use Makefile because some people work on Windows workstations and the
-install of make is cumbersome on those._
-
-## Project organization
-
-```text
-    ├── tasks.py           <- Invoke with commands like `notebook`
-    ├── README.md          <- The top-level README for developers using this project.
-    ├── data
-    │   ├── external       <- Data from third party sources.
-    │   ├── interim        <- Intermediate data that has been transformed.
-    │   ├── processed      <- The final, canonical data sets for modeling.
-    │   └── raw            <- The original, immutable data dump.
-    │
-    ├── models             <- Trained and serialized models, model predictions, or model summaries
-    │
-    ├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
-    │                         the creator's initials, and a short `-` delimited description, e.g.
-    │                         `1.0-jqp-initial-data-exploration`.
-    │
-    ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
-    │
-    ├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
-    │   └── figures        <- Generated graphics and figures to be used in reporting
-    │
-    ├── environment.yml    <- The requirements file for reproducing the analysis environment
-    │
-    └── src                <- Source code for use in this project.
-        ├── __init__.py    <- Makes src a Python module
-        │
-        ├── data           <- Scripts to download or generate data
-        │   └── make_dataset.py
-        │
-        ├── features       <- Scripts to turn raw data into features for modeling
-        │   └── build_features.py
-        │
-        ├── models         <- Scripts to train models and then use trained models to make
-        │   │                 predictions
-        │   ├── predict_model.py
-        │   └── train_model.py
-        │
-        └── visualization  <- Scripts to create exploratory and results oriented visualizations
-            └── visualize.py
-```
-
-Project based on the [cookiecutter Kaggle template project](https://github.com/andfanilo/cookiecutter-kaggle). #cookiecutterdatascience
