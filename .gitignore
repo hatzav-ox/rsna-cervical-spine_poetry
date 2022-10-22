@@ -92,3 +92,14 @@ target/
 
 # Hydra logs
 outputs
+
+# Latex
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.out
+*.synctex.gz
+*.run.xml

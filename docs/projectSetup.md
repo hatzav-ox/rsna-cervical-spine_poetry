@@ -3,7 +3,7 @@
 ## Prerequisites
 
 The project was setup using a cookie cutter template as provided for here:
-<https://github.com/andfanilo/cookiecutter-kaggle>.
+<https://github.com/khuyentran1401/data-science-template>.
 
 To set it up, do the following:
 
@@ -17,5 +17,5 @@ To set it up, do the following:
 1. Build template
 
   ```bash
-  cookiecutter https://github.com/andfanilo/cookiecutter-kaggle.git
+  cookiecutter https://github.com/khuyentran1401/data-science-template
   ```

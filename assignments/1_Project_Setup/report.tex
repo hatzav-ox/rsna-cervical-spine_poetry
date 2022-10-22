@@ -1,0 +1,99 @@
+\documentclass[11pt]{article}
+
+    \usepackage{graphicx}
+    \usepackage{float}
+    \usepackage{caption}
+    \usepackage{authblk}
+    
+    \usepackage[style=authoryear]{biblatex}
+    \addbibresource{report.bib}
+    \usepackage{hyperref}
+    
+    \title{RSNA Cervical Spine Fracture Detection}
+
+    \author[1]{Eisha, FNU\thanks{eisha@uni.minerva.edu}}
+    \author[1]{Hyder, Haitham Alhad\thanks{haitham.hyder@uni.minerva.edu}}
+    \author[1]{Wambui, Stevedavies\thanks{stevedaviesndegwa@uni.minerva.edu}}
+    \affil[1]{
+      \textbf{Haadavand's Minions}  \\
+      \texttt{
+        \href{mailto:hadavands-minions@uni.minerva.edu}
+        {hadavands-minions@uni.minerva.edu}
+      }
+    }
+
+    \renewcommand\Authands{ and }
+    \date{\vspace{-5ex}}
+
+
+\begin{document}
+
+\maketitle
+
+\section*{Research Question}\label{research-question}
+
+How can we quickly detect and locate vertebral fractures in the 
+cervical spine from CT scans to aid in the prevention of 
+neurologic deterioration and paralysis after trauma?
+
+\section*{Justification}\label{justification}
+
+In the US alone, there are ~17,730 spinal cord injuries every year \parencite{Morano2021-ak}.
+According to the Kaggle competition, most of these spinal cord injuries occur
+in the cervical spine (neck) \parencite{kaggle}.
+There has also been a rise in the incidences of spinal fractures in the elderly
+and this population, fractures can be more difficult to detect on imaging.
+Superimposed degenerative disease and osteoporosis is one of the main factors
+leading to this difficulty. It is a problem since most of these image
+diagnosis are done almost exclusively using computed tomography (CT) \parencite{munera2012}
+instead of radiographs (x-rays).
+
+According to the National Spinal Cord Injury Statistical Center
+about 39.3\% of these spinal cord injuries are from vehicle crashes.
+And another 31.8\% from falls \parencite{NSCISC2019}.
+Therefore, quick detection of vertebral fractures and their location is essential
+when preventing deterioration and paralysis after trauma. Therefore, through
+this project, we will be aiming to first detect vertebral fractures, and second
+if possible, the location of cervical spine fractures. The main aim is
+to match the radiologists' performance since the dataset we are using was professionally
+annotated by Spine radiology specialists from the 
+\href{https://www.asnr.org/}{American Society of Neuroradiology (ASNR)}
+and the \href{https://www.theassr.org/}{American Society of Spine Radiology (ASSR)}.
+
+\section*{Data Collection Strategies}\label{data-collection-strategies}
+
+For this project, the main source of the dataset is Kaggle where
+the image data and labels have already been given. 
+This was convenient because we did not have to go through hoops 
+of determining whether or not we can scrape data from a given 
+website. It also meant that we did not have to spend time figuring 
+out what type of data to collect and what is relevant for a given 
+scenario. 
+
+However, we did not anticipate the challenge that would come with working 
+with over 300 GB of image data with laptops meant for school work. 
+This is a challenge that was unexpected and took significantly longer 
+o work through than we planned for. Specifically, the breakdown of 
+the challenges and how we overcame them is as follows:
+
+\begin{enumerate}
+  \item With 300 GB of data, it meant we needed to have at least 
+  600 GB of local storage because the data was zipped: the zipped 
+  file would be 300 GB and the unzipped file would be 300 GB. 
+  Haitham bought an external hard disk with enough storage to store 
+  this data and was able to successfully download the data.
+  \item The unzipping of the data took a very long time: 
+  at least 14 hours. Since this was a long wait time, we also 
+  looked into alternatives: we found a jpg dataset with a much
+  greater reduction in size (59 GB).
+  \item Github has a limit on the size of files you can upload and 
+  therefore couldn't upload the data to Github. Instead we uploaded
+  the image data to a Google Drive folder and we will read the data 
+  into a Google Colab file that is in the same directory as the folder 
+  of images.
+\end{enumerate}
+
+% Add a bibliography block to the postdoc
+\printbibliography
+
+\end{document}

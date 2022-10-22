@@ -2,6 +2,12 @@
 
 Data Science tutorial project by the Hadavand's Minions group to tackle the Kaggle project on cervical spine fracture detection.
 
+## Tutorial Assignments
+
+The following are the locations for the assignments done within this tutorial by the Hadavand's Minions group:
+
+1. [Setting up your Project](./assignments/1_Project_Setup/)
+
 ## Project setup
 
 The project was setup using `cookiecutter` as described in the

@@ -10,6 +10,7 @@
     "labextension",
     "nbdime",
     "nbextension",
+    "pdoc",
     "Plotly",
     "plotlywidget",
     "rsna",
