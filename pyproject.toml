@@ -11,6 +11,8 @@ hydra-core = "^1.1.1"
 pdoc3 = "^0.10.0"
 notebook = "^6.4.10"
 pre-commit = "^2.19.0"
+nibabel = "^4.0.2"
+seaborn = "^0.12.1"
 
 
 [tool.poetry.dev-dependencies]
