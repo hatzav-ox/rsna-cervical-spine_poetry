@@ -15,5 +15,6 @@
     "plotlywidget",
     "rsna",
     "serverextension"
-  ]
+  ],
+  "python.analysis.typeCheckingMode": "basic"
 }
