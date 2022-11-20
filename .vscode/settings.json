@@ -16,5 +16,7 @@
     "rsna",
     "serverextension"
   ],
-  "python.analysis.typeCheckingMode": "basic"
+  "python.analysis.typeCheckingMode": "basic",
+  "python.linting.flake8Enabled": true,
+  "python.linting.enabled": true,
 }
