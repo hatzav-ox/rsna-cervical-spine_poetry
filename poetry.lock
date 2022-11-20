@@ -1877,6 +1877,17 @@ carto = ["pydeck-carto"]
 jupyter = ["ipykernel (>=5.1.2)", "ipython (>=5.8.0)", "ipywidgets (>=7,<8)", "traitlets (>=4.3.2)"]
 
 [[package]]
+name = "pydicom"
+version = "2.3.1"
+description = "A pure Python package for reading and writing DICOM data"
+category = "main"
+optional = false
+python-versions = ">=3.6.1"
+
+[package.extras]
+docs = ["matplotlib", "numpy", "numpydoc", "pillow", "sphinx", "sphinx-copybutton", "sphinx-gallery", "sphinx-rtd-theme", "sphinxcontrib-napoleon"]
+
+[[package]]
 name = "pydot"
 version = "1.4.2"
 description = "Python interface to Graphviz's Dot"
@@ -2614,7 +2625,7 @@ testing = ["flake8 (<5)", "func-timeout", "jaraco.functools", "jaraco.itertools"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9.8"
-content-hash = "80fd3580fb836c9af54297ca6dbe1584a5d18fe016e3bdd4ec5af7bd51f0a020"
+content-hash = "fffa189aa9df5c667ccc801701b439f5d8521aa4f27355b96eb4d73a7bf3a6cd"
 
 [metadata.files]
 aiohttp = [
@@ -3935,6 +3946,10 @@ pycparser = [
 pydeck = [
     {file = "pydeck-0.8.0-py2.py3-none-any.whl", hash = "sha256:a8fa7757c6f24bba033af39db3147cb020eef44012ba7e60d954de187f9ed4d5"},
     {file = "pydeck-0.8.0.tar.gz", hash = "sha256:07edde833f7cfcef6749124351195aa7dcd24663d4909fd7898dbd0b6fbc01ec"},
+]
+pydicom = [
+    {file = "pydicom-2.3.1-py3-none-any.whl", hash = "sha256:b00bacdabc1f8a18b61a08bb6cd0f41c419446531638c895a708c22a35d69cfe"},
+    {file = "pydicom-2.3.1.tar.gz", hash = "sha256:655db29c21cb333a4f9dfffdeaa80995b1d3b89e98b66a16f5cc886e5b338028"},
 ]
 pydot = [
     {file = "pydot-1.4.2-py2.py3-none-any.whl", hash = "sha256:66c98190c65b8d2e2382a441b4c0edfdb4f4c025ef9cb9874de478fb0793a451"},
