@@ -2,11 +2,29 @@
 
 Data Science tutorial project by the Hadavand's Minions group to tackle the Kaggle project on cervical spine fracture detection.
 
+## About The Project
+
+Our research question is “How can we quickly detect and locate vertebral fractures in the cervical spine from CT scans to aid in the prevention of neurologic deterioration and paralysis after trauma?”. The data we are working with consists of CT scans cervical spines of patients and the goal is identify whether a given vertebrae and therefore overall patient has a fracture. We got the data from .Kaggle RSNA competition [here](https://www.kaggle.com/competitions/rsna-2022-cervical-spine-fracture-detection/data). The data consits of:
+
+
+Two video walkthroughs of the image slices is shown below. The first contains plain image slices and the second contains image slices with their masks overlaird
+
+![](https://github.com/Hadavand-s-Minions/rsna-cervical-spine/blob/main/Video_Gifs/no_mask_verteb.gif)<br>
+![](./Video_Gifs/mask.gif)
+
+We run exploratory analysis on the dataset and find a big class imbalance (there are way more cases with fractures than without) which helps us determine what models to choose and the metrics to evaluate. An indepth EDA can be found in the cervical_spine_eda [notebook](./notebooks/Cervical_Spine_EDA.ipynb)  within the notebook directory
+
+We use 4 classifaction models as in this [notebook](./notebooks/RSNA_Classification.ipynb) within the notebooks directory. The Basic RNN model has the best performance. It has the lowest loss, highest AUC and F1 scores and predicts the test set accurately. The loss and accrucacy are shown below
+
+![](https://github.com/Hadavand-s-Minions/rsna-cervical-spine/blob/main/Video_Gifs/basiccnn.png)
+
 ## Tutorial Assignments
 
 The following are the locations for the assignments done within this tutorial by the Hadavand's Minions group:
 
 1. [Setting up your Project](./assignments/1_Project_Setup/)
+2. [Exploratory_Analysis](./assignments/2_Exploratory_DA/)
+3. [Final_Writeup](./assignments/3_Final_Writeup/)
 
 ## Project setup
 
@@ -58,66 +76,3 @@ The project was setup using `cookiecutter` as described in the
     └── test_train_model.py         # test functions for train_model.py
 ```
 
-## Set up the environment
-
-1. Install [Poetry](https://python-poetry.org/docs/#installation)
-2. Set up the environment:
-
-    ```bash
-    make activate
-    make setup
-    ```
-
-## Install new packages
-
-To install new PyPI packages, run:
-
-```bash
-poetry add <package-name>
-```
-
-## Run the entire pipeline
-
-To run the entire pipeline, type:
-
-```bash
-dvc repo
-```
-
-## Version your data
-
-Read [this article](https://towardsdatascience.com/introduction-to-dvc-data-version-control-tool-for-machine-learning-projects-7cb49c229fe0) on how to use DVC to version your data.
-
-Basically, you start with setting up a remote storage. The remote storage is where your data is stored. You can store your data on DagsHub, Google Drive, Amazon S3, Azure Blob Storage, Google Cloud Storage, Aliyun OSS, SSH, HDFS, and HTTP.
-
-```bash
-dvc remote add -d remote <REMOTE-URL>
-```
-
-Commit the config file:
-
-```bash
-git commit .dvc/config -m "Configure remote storage"
-```
-
-Push the data to remote storage:
-
-```bash
-dvc push 
-```
-
-Add and push all changes to Git:
-
-```bash
-git add .
-git commit -m 'commit-message'
-git push origin <branch>
-```
-
-## Auto-generate API documentation
-
-To auto-generate API document for your project, run:
-
-```bash
-make docs
-```
