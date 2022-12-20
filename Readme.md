@@ -10,7 +10,7 @@ Our research question is “How can we quickly detect and locate vertebral fract
 Two video walkthroughs of the image slices is shown below. The first contains plain image slices and the second contains image slices with their masks overlaird
 
 ![](https://github.com/Hadavand-s-Minions/rsna-cervical-spine/blob/main/video_gifs/no_mask_verteb.gif)<br>
-![](./Video_Gifs/mask.gif)
+![](./video_gifs/mask.gif)
 
 We run exploratory analysis on the dataset and find a big class imbalance (there are way more cases with fractures than without) which helps us determine what models to choose and the metrics to evaluate. An indepth EDA can be found in the cervical_spine_eda [notebook](./notebooks/Cervical_Spine_EDA.ipynb)  within the notebook directory
 
