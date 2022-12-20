@@ -24,7 +24,7 @@ The following are the locations for the assignments done within this tutorial by
 
 1. [Setting up your Project](./assignments/1_Project_Setup/)
 2. [Exploratory_Analysis](./assignments/2_Exploratory_DA/)
-3. [Final_Writeup](./assignments/3_Final_Writeup/)
+3. [Final_Writeup](./assignments/3_Final_Project/)
 
 ## Project setup
 
